@@ -19,6 +19,7 @@
  */
 namespace OC\License;
 
+use OC\HintException;
 use OC\License\BasicLicense;
 use OCP\IConfig;
 use OCP\AppFramework\Utility\ITimeFactory;
@@ -48,9 +49,18 @@ class LicenseFetcher {
 	 * return invalid or expired licenses present there.
 	 * If the DB license is invalid or expired and the one in the system configuration
 	 * is missing, we'll return the DB one even though it's invalid
+	 *
 	 * @return ILicense|null the license object or null if no license is found
+	 * @throws HintException
 	 */
 	public function getOwncloudLicense(): ?ILicense {
+		$licenseClass = $this->config->getSystemValue('license-class', null);
+		if ($licenseClass) {
+			if (!\class_exists($licenseClass)) {
+				throw new HintException("Unknown license $licenseClass");
+			}
+			return new $licenseClass();
+		}
 		$license = null;
 		$licenseKey = $this->config->getAppValue('enterprise_key', 'license-key', null);
 		if ($licenseKey !== null) {
