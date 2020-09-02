@@ -1,0 +1,8 @@
+Enhancement: Re-design ugly yellow notification bar 
+
+Yellow notification center got redesigned:
+- Not blocking the top centered logo anymore
+- gets more attention using icons and red color
+- looks more modern
+
+https://github.com/owncloud/core/pull/37875
