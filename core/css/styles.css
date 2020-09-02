@@ -677,7 +677,6 @@ td.avatar {
 #notification {
 	overflow-x: hidden;
 	overflow-y: auto;
-	max-height: 100px;
 }
 #notification-container #notification a:hover {
 	text-decoration: underline;
