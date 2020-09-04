@@ -16,7 +16,7 @@ Feature: add user
     And user "brand-new-user" should exist
     And user "brand-new-user" should be able to access a skeleton file
 
-  @skipOnOcV10.3 @issue-product-187
+  @skipOnOcV10.3
   Scenario Outline: admin creates a user with special characters in the username
     Given user "<username>" has been deleted
     When the administrator sends a user creation request for user "<username>" password "%alt1%" using the provisioning API
@@ -29,7 +29,6 @@ Feature: add user
       | a@-+_.b  |
       | a space  |
 
-  @issue-product-199
   Scenario: admin tries to create an existing user
     Given user "brand-new-user" has been created with default attributes and skeleton files
     When the administrator sends a user creation request for user "brand-new-user" password "%alt1%" using the provisioning API
@@ -37,7 +36,6 @@ Feature: add user
     And the HTTP status code should be "400"
     And the API should not return any data
 
-  @issue-product-199
   Scenario: admin tries to create an existing disabled user
     Given user "brand-new-user" has been created with default attributes and skeleton files
     And user "brand-new-user" has been disabled
@@ -68,7 +66,6 @@ Feature: add user
       | España§àôœ€                  | special European and other characters |
       | नेपाली                       | Unicode                               |
 
-  @issue-product-197
   Scenario: admin creates a user and specifies an invalid password, containing just space
     Given user "brand-new-user" has been deleted
     When the administrator sends a user creation request for user "brand-new-user" password " " using the provisioning API
@@ -84,7 +81,6 @@ Feature: add user
     And user "brand-new-user" should exist
     And user "brand-new-user" should be able to access a skeleton file
 
-  @issue-product-200
   Scenario Outline: admin creates a user with username that contains capital letters
     When the administrator sends a user creation request for user "<display-name>" password "%alt1%" using the provisioning API
     Then the OCS status code should be "200"
@@ -103,7 +99,6 @@ Feature: add user
       | brand-NEW-user |
       | BrAnD-nEw-UsEr |
 
-  @issue-product-200
   Scenario: admin tries to create an existing user but with username containing capital letters
     Given user "brand-new-user" has been created with default attributes and skeleton files
     When the administrator sends a user creation request for user "BRAND-NEW-USER" password "%alt1%" using the provisioning API

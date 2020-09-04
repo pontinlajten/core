@@ -46,6 +46,7 @@ Feature: edit users
 
   Scenario: the administrator can clear a user display name and then it defaults to the username
     Given user "brand-new-user" has been created with default attributes and skeleton files
+    And user "brand-new-user" should exist
     And the administrator has changed the display name of user "brand-new-user" to "A New User"
     When the administrator changes the display name of user "brand-new-user" to "" using the provisioning API
     Then the HTTP status code should be "200"

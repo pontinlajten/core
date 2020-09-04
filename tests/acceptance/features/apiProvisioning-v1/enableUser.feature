@@ -1,4 +1,4 @@
-@api @provisioning_api-app-required @skipOnLDAP
+@api @provisioning_api-app-required @skipOnLDAP @notToImplementOnOCIS
 Feature: enable user
   As an admin
   I want to be able to enable a user
@@ -40,7 +40,6 @@ Feature: enable user
     And the HTTP status code should be "200"
     And user "another-admin" should be enabled
 
-  @notToImplementOnOCIS
   Scenario: admin enables subadmins in the same group
     Given user "subadmin" has been created with default attributes and skeleton files
     And group "brand-new-group" has been created
@@ -71,7 +70,6 @@ Feature: enable user
     And the HTTP status code should be "401"
     And user "Brian" should be disabled
 
-  @notToImplementOnOCIS
   Scenario: subadmin tries to enable himself
     Given user "subadmin" has been created with default attributes and skeleton files
     And group "brand-new-group" has been created

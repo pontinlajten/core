@@ -1,4 +1,4 @@
-@api @provisioning_api-app-required @skipOnLDAP
+@api @provisioning_api-app-required @skipOnLDAP @notToImplementOnOCIS
 Feature: disable user
   As an admin
   I want to be able to disable a user
@@ -29,7 +29,7 @@ Feature: disable user
       | a@-+_.b  | a.b@example.com     |
       | a space  | a.space@example.com |
 
-  @smokeTest @notToImplementOnOCIS
+  @smokeTest
   Scenario: Subadmin should be able to disable an user in their group
     Given these users have been created with default attributes and skeleton files:
       | username |
@@ -44,7 +44,7 @@ Feature: disable user
     And the HTTP status code should be "200"
     And user "Alice" should be disabled
 
-  @issue-31276 @notToImplementOnOCIS
+  @issue-31276
   Scenario: Subadmin should not be able to disable an user not in their group
     Given these users have been created with default attributes and skeleton files:
       | username |
@@ -61,7 +61,7 @@ Feature: disable user
     And the HTTP status code should be "401"
     And user "Alice" should be enabled
 
-  @issue-31276 @notToImplementOnOCIS
+  @issue-31276
   Scenario: Subadmins should not be able to disable users that have admin permissions in their group
     Given these users have been created with default attributes and skeleton files:
       | username      |
@@ -86,7 +86,6 @@ Feature: disable user
     And the HTTP status code should be "200"
     And user "another-admin" should be disabled
 
-  @notToImplementOnOCIS
   Scenario: Admin can disable subadmins in the same group
     Given user "subadmin" has been created with default attributes and skeleton files
     And group "brand-new-group" has been created
@@ -118,7 +117,6 @@ Feature: disable user
     And the HTTP status code should be "401"
     And user "Brian" should be enabled
 
-  @notToImplementOnOCIS
   Scenario: Subadmin should not be able to disable himself
     Given user "subadmin" has been created with default attributes and skeleton files
     And group "brand-new-group" has been created
