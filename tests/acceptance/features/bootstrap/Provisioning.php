@@ -3159,6 +3159,7 @@ trait Provisioning {
 		$user = $this->getActualUsername($user);
 		$this->disableOrEnableUser($this->getAdminUsername(), $user, 'disable');
 		$this->theHTTPStatusCodeShouldBeSuccess();
+		$this->ocsContext->assertOCSResponseIndicatesSuccess();
 	}
 
 	/**
