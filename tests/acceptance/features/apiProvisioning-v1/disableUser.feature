@@ -11,7 +11,7 @@ Feature: disable user
   Scenario: admin disables an user
     Given user "Alice" has been created with default attributes and skeleton files
     When the administrator disables user "Alice" using the provisioning API
-#    Then the OCS status code should be "100"
+    Then the OCS status code should be "100"
     And the HTTP status code should be "200"
     And user "Alice" should be disabled
 

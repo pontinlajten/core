@@ -3606,9 +3606,15 @@ trait Provisioning {
 			$this->simplifyArray($users)
 		);
 		$respondedArray = $this->getArrayOfUsersResponded($this->response);
-		Assert::assertEqualsCanonicalizing(
-			$usersSimplified, $respondedArray
-		);
+		foreach ($usersSimplified as $userElement) {
+			Assert::assertContains(
+				$userElement,
+				$respondedArray,
+				__METHOD__
+				. " user $userElement is not present in the users list: \n"
+				. \join("\n", $respondedArray)
+			);
+		}
 	}
 
 	/**
