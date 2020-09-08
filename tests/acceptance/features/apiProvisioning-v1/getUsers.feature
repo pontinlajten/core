@@ -17,13 +17,12 @@ Feature: get users
       | brand-new-user |
       | admin          |
 
-  @skipOnOCV10
   Scenario: admin gets all users
     Given user "brand-new-user" has been created with default attributes and skeleton files
     When the administrator gets the list of all users using the provisioning API
     Then the OCS status code should be "100"
     And the HTTP status code should be "200"
-    And the users returned by the API should be
+    And the users returned by the API should include
       | brand-new-user |
 
   @smokeTest @notToImplementOnOCIS

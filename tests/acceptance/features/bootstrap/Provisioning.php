@@ -3607,6 +3607,28 @@ trait Provisioning {
 			$this->simplifyArray($users)
 		);
 		$respondedArray = $this->getArrayOfUsersResponded($this->response);
+		Assert::assertEqualsCanonicalizing(
+			$usersSimplified, $respondedArray
+		);
+	}
+
+	/**
+	 * @Then /^the users returned by the API should include$/
+	 *
+	 * @param TableNode $usersList
+	 *
+	 * @return void
+	 */
+	public function theUsersShouldInclude($usersList) {
+		$this->verifyTableNodeColumnsCount($usersList, 1);
+		$users = $usersList->getRows();
+		$usersSimplified = \array_map(
+			function ($user) {
+				return $this->getActualUsername($user);
+			},
+			$this->simplifyArray($users)
+		);
+		$respondedArray = $this->getArrayOfUsersResponded($this->response);
 		foreach ($usersSimplified as $userElement) {
 			Assert::assertContains(
 				$userElement,
